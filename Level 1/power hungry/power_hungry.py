@@ -46,4 +46,41 @@ Output:
     60
 """
 
-# TODO
+from operator import mul
+
+from functools import reduce
+
+def answer(xs):
+    if not xs or len(xs) == 1: return "0"
+    
+    negatives = [x for x in xs if x < 0]
+    positives = [x for x in xs if x > 0]
+    
+    if not negatives and not positives:
+        return "0"
+    if len(negatives)== 1 and not positives:
+        return "0"
+    
+    output = reduce(mul, positives)
+    
+    # remove largest negative number
+    if len(negatives) % 2:
+        negatives.remove(max(negatives))
+    
+    output *= reduce(mul, negatives)
+    
+    return str(output)
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
